@@ -140,7 +140,21 @@
       </div>
     </nav>
 
-   
+    <header class="py-3 mb-4 border-bottom">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <a href="index.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+          <i class="bi bi-apple apple">1조신발</i>
+          <span class="fs-4">AAA Mart Admin</span>
+        </a>
+        <form class="col-11 col-lg-auto mb-3 mb-lg-0">
+          <input type="search" style="border-radius: 15px;" class="form-control a" placeholder="Search..." aria-label="Search" />
+        </form>
+        <form class="col-1 col-lg-auto mb-3 mb-lg-0">
+          <button type="button" style="border-radius: 15px;" class="btn btns btn-secondary binfo">search</button>
+        </form>
+      </div>
+    </header>
+    <!-- 헤더 끝 ! -->
 
  <section id="work" class="section">
         <div class="section__container">

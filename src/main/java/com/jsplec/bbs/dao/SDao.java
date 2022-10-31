@@ -237,34 +237,170 @@ DataSource dataSource;
 				}
 				return dto;
 			}// detail_view
+		
 			
-			public void write(String cId,String pId) {
+			//카트에 구매하기 누르면 임시 정보를 넣어줌
+			
+			
+	public void cart(String customer_id, int product_id, int cart_product_quantity) {	
+				
+				
 				Connection connection = null;
 				PreparedStatement preparedStatement = null;
+			
+			
+			try {
+				connection = dataSource.getConnection();
+				
+				String query = "insert into cart (customer_id, product_id, cart_date, cart_product_quantity ) values(?,?,now(),?)";
+			
+					
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, customer_id);
+				preparedStatement.setInt(2, product_id);
+				preparedStatement.setInt(3, cart_product_quantity);
+				
+				preparedStatement.executeUpdate();
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null)connection.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+				
+			
+	}//주문완료	customer_order에 insert 됨	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		//구매하기 누르면 고객 정보와 제품, 주문내역 띄워줌
+			
+			
+			public SDto buy(String Scustomer_name, String Scustomer_address, String Sproduct_name, int Sproduct_size, int Sproduct_price, int Scart_product_quantity) {	
+				
+				SDto dto = null;
+				Connection connection = null;
+				PreparedStatement preparedStatement = null;
+				ResultSet resultSet = null;
 				
 				try {
 					connection = dataSource.getConnection();
 					
-					String query = "insert into  (customer_id, product_id, order_date) values(?,?,now())";
-					preparedStatement = connection.prepareStatement(query);
-					preparedStatement.setString(1,cId);
-					preparedStatement.setString(2,pId);
+					String query = "select c.customer_name,c.customer_address,p.product_name,p.product_size,p.product_price, t.cart_product_quantity ";
+					String query2 = "from product p, customer c, cart t where c.customer_id = t.customer_id and p.product_id = t.product_id and c.customer_id = ?";
 					
 					
-					preparedStatement.executeUpdate();
-				
+					preparedStatement = connection.prepareStatement(query+query2);
+					
+					preparedStatement.setInt(1, Integer.parseInt(customer_id));  //customer_id를 넣어줘야함. session 사용해도 될듯  
+					
+					resultSet = preparedStatement.executeQuery();
+					
+					if(resultSet.next()) {
+						
+						
+						String product_name = resultSet.getString("product_name");
+						int product_size = resultSet.getInt("product_size");
+						int product_price = resultSet.getInt("product_price");
+						String customer_name = resultSet.getString("customer_name");
+						String customer_address = resultSet.getString("customer_address");
+						int cart_product_quantity = resultSet.getInt("cart_product_quantity");
+						
+						// c.customer_name로 받아야하는지 customer_name로 받아야하는지 확인!!!
+						
+						
+						
+						dto = new SDto(product_name, product_size,product_price, customer_name, customer_address, cart_product_quantity);
+						
+					}
 					
 				}catch(Exception e) {
 					e.printStackTrace();
 				}finally {
 					try {
+						if(resultSet !=null) resultSet.close();
 						if(preparedStatement != null) preparedStatement.close();
 						if(connection != null) connection.close();
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
-					
 				}
+				return dto;
+			
+	}//구매하기		
+			
+			
+			
+			
+	//구매하기 창에서 수정할 내역은 수정한 다음 결제하기를 누르면 주문이 완료됨		
+			
+			public void payment(String customer_id, String product_id, int order_quantity, int order_price) {	
 				
-			}//입력
+				
+				Connection connection = null;
+				PreparedStatement preparedStatement = null;
+			
+			
+			try {
+				connection = dataSource.getConnection();
+				
+				String query = "insert into customer_orders (customer_id,product_id, order_date, order_quantity, order_price ) values(?,?,now(),?,?)";
+			
+					
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, customer_id);
+				preparedStatement.setString(2, product_id);
+				preparedStatement.setInt(3, order_quantity);
+				preparedStatement.setInt(4, order_price);
+				
+				preparedStatement.executeUpdate();
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(preparedStatement != null) preparedStatement.close();
+					if(connection != null)connection.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+				
+			
+	}//주문완료	customer_order에 insert 됨	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 }//---------------------------------------------

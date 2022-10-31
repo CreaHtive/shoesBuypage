@@ -11,6 +11,10 @@ public class SDto {
 	int product_size;
 	String product_info;
 	
+	String customer_name;
+	String customer_address;
+	int cart_product_quantity;
+	
 	
 	public SDto() {
 		// TODO Auto-generated constructor stub
@@ -59,6 +63,64 @@ public class SDto {
 		this.product_category = product_category;
 		this.product_brand = product_brand;
 		this.product_info = product_info;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	public SDto(String product_name, int product_size,int product_price, String customer_name, String customer_address,
+			int cart_product_quantity) {
+		super();
+		this.product_name = product_name;
+		this.product_size = product_size;
+		this.product_price = product_price;
+		this.customer_name = customer_name;
+		this.customer_address = customer_address;
+		this.cart_product_quantity = cart_product_quantity;
+	}
+
+	
+	
+	
+	
+	
+
+	public String getCustomer_name() {
+		return customer_name;
+	}
+
+
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+
+
+	public String getCustomer_address() {
+		return customer_address;
+	}
+
+
+	public void setCustomer_address(String customer_address) {
+		this.customer_address = customer_address;
+	}
+
+
+	public int getCart_product_quantity() {
+		return cart_product_quantity;
+	}
+
+
+	public void setCart_product_quantity(int cart_product_quantity) {
+		this.cart_product_quantity = cart_product_quantity;
 	}
 
 

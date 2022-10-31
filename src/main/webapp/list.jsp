@@ -123,11 +123,34 @@
 						<tr>
 							<td>브랜드</td><td>${dto.product_brand}</td>
 						</tr>
+						<tr>
+							<td>구매갯수</td><td><select name="cart_product_quantity">
+							
+							<%for(int i =1; i<=10; i++){
+							out.println( "<option value ="+i+">"+i+"</option>");
+							
+							} %></select>  
+							
+							
+							 </td>
+						</tr>
 						
 						
 					</table>
 					<a href="detail_view.do?id=${dto.product_id}" class="btn btns btn-secondary">상세 페이지</a>
-					<a href="purchase.jsp" class="btn btns btn-secondary">구매하기</a>
+					
+					
+					<a href="cart.do?id=${dto.product_id}" class="btn btns btn-secondary">구매하기</a>
+					
+					<!-- cart로 정보를 넘겨줌 이후 cart에서 구매하기 창으로 넘어감 -->
+					
+					<!-- 여기서 구매하는 제품의 숫자도 정보로 넘겨줘야함 -->
+					
+					
+					
+					
+					
+					
 				</div>
 				</div>
 				</div>
