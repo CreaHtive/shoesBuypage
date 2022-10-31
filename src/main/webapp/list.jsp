@@ -127,7 +127,7 @@
 							<td>구매갯수</td><td><select name="cart_product_quantity">
 							
 							<%for(int i =1; i<=10; i++){
-							out.println( "<option value ="+i+">"+i+"</option>");
+							out.println( "<option value ="+i+">"+i+"</option>"); //여기있는 cart_product_quantity 정보를 보내줘야함
 							
 							} %></select>  
 							

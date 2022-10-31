@@ -263,6 +263,8 @@ DataSource dataSource;
 				preparedStatement.executeUpdate();
 				
 				
+				
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -296,7 +298,7 @@ DataSource dataSource;
 		//구매하기 누르면 고객 정보와 제품, 주문내역 띄워줌
 			
 			
-			public SDto buy(String Scustomer_name, String Scustomer_address, String Sproduct_name, int Sproduct_size, int Sproduct_price, int Scart_product_quantity) {	
+			public SDto buy() {	
 				
 				SDto dto = null;
 				Connection connection = null;
@@ -312,7 +314,11 @@ DataSource dataSource;
 					
 					preparedStatement = connection.prepareStatement(query+query2);
 					
-					preparedStatement.setInt(1, Integer.parseInt(customer_id));  //customer_id를 넣어줘야함. session 사용해도 될듯  
+					preparedStatement.setString(1, "a");  //customer_id를 넣어줘야함. session 사용해도 될듯  
+					
+					
+					
+					//----------------------------------------------------------------------------------------//
 					
 					resultSet = preparedStatement.executeQuery();
 					
